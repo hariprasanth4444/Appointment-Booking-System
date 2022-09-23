@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+    .topnav {
+      background-color: rgb(7, 3, 3);
+      overflow: hidden;
+        }
+
+      /* Style the links inside the navigation bar */
+      .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+
+      /* Change the color of links on hover */
+      .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+
+      /* Add a color to the active/current link */
+      .topnav a.active {
+        background-color: #29a329;
+        color: white;
+      }
+</style>
+<body>
+    <nav>
+		<div class="topnav">
+			<a class="active" href="/">User</a>
+			<a href="/admin">Admin</a>
+		  </div>
+		  </nav><br>
+          <div class="container">
+           <a href="/admin"> <button type="button" class="btn btn-success">Refresh</button></a><br>
+            <h2>Details</h2>
+            <p>This table displays the details: :</p>            
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Mobile</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for instance in res %}
+                <tr>
+                  <td>{{instance[0]}}</td>
+                  <td>{{instance[1]}}</td>
+                  <td>{{instance[2]}}</td>
+                  <td>{{instance[3]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table><br>
+        </div>
+        <div>
+            <form action="/collectmob" method="post">
+                <div class="container p-3 my-3 bg-dark text-white">
+                    <h3>Enter Mobile Number to Confirm/Reject:</h3>
+                    <label for="mob"><b>Mobile</b></label>
+                    <input type="text" placeholder="Enter Your Mobile Number" name="mob" required><br>
+                    <div class = "form-check">
+                        <input class = "from-check-input" type="radio" name = "status" value="approve">
+                        <label class="form-check-label" >
+                            Approve
+                        </label>
+                    </div>
+    
+                    <div class = "form-check">
+                        <input class = "from-check-input" type="radio" name = "status" value="reject">
+                        <label class="form-check-label" >
+                            Reject
+                        </label>
+                    </div>
+    
+                    <div class = "form-check">
+                      <input class = "from-check-input" type="radio" name = "status" value="assign">
+                      <label class="form-check-label" >
+                          Assign some time
+                      </label>
+                  </div>
+                  <label for="scheduletime">Schedule (date and time):</label>
+                    <input type="datetime-local" id="scheduletime" name="time"><br>
+
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <input type="submit" class="btn btn-success"></input>
+                      </div>
+                      
+            </form>
+            {{res1}}
+        </div>
+    
+</body>
+</head>
+</html>
